@@ -1,5 +1,6 @@
 import express from "express"
 import mysql from "mysql"
+import cors from "cors"
 
 const app = express()
 
@@ -13,6 +14,7 @@ const db = mysql.createConnection({
 
 
 app.use(express.json())
+app.use(cors())
 
 app.get("/", (req,res)=>{
     res.json("hello this is the backend")
@@ -47,5 +49,5 @@ app.post("/recipes", (req, res) => {
 
 
 app.listen(8800, ()=>{
-    console.log("Connexted to backend")
+    console.log("Conneted to backend")
 })
