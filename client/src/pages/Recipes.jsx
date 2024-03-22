@@ -26,17 +26,27 @@ const Recipes = () => {
         <div>
             <h1>Cookbook</h1>
             <div className="recipes">
-                {recipes.map(recipe=>(
+                {recipes.map(recipe =>(
                     <div className="recipe">
                         <img src={recipe.picture} alt="" />
                         <h2>{recipe.title}</h2>
                         <p>{recipe.author}</p>
                         <p>{recipe.desc}</p>
+                        {ReciceComponent(recipe)}
                     </div>
                 ))}
             </div>
         </div>    
     )
-}
+                  
+  function ReciceComponent(recipe) {
+      return (
+        <div>{recipe.title} {recipe.author} {recipe.desc}</div>
+      );
+  }
+
+
+  
+  }
 
 export default Recipes
