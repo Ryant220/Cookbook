@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Recipe from '../components/Recipe.jsx';
 
 
 
@@ -26,27 +27,16 @@ const Recipes = () => {
         <div>
             <h1>Cookbook</h1>
             <div className="recipes">
-                {recipes.map(recipe =>(
-                    <div className="recipe">
+                {recipes.map((recipe,i)=> (
+                      <div className="recipe" key={i}>
                         <img src={recipe.picture} alt="" />
-                        <h2>{recipe.title}</h2>
-                        <p>{recipe.author}</p>
-                        <p>{recipe.desc}</p>
-                        {ReciceComponent(recipe)}
-                    </div>
+                        <Recipe title={recipe.title} author={recipe.author} desc={recipe.desc}/>
+                      </div>
                 ))}
             </div>
         </div>    
     )
-                  
-  function ReciceComponent(recipe) {
-      return (
-        <div>{recipe.title} {recipe.author} {recipe.desc}</div>
-      );
-  }
-
-
-  
+                    
   }
 
 export default Recipes
