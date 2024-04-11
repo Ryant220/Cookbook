@@ -3,7 +3,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Recipe from '../components/Recipe.jsx';
+import RecipeCard from '../components/RecipeCard.jsx';
+import NavBar from "../components/NavBar.jsx";
 
 
 
@@ -25,12 +26,15 @@ const Recipes = () => {
 
     return (
         <div>
+            <NavBar/> 
             <h1>Cookbook</h1>
             <div className="recipes">
-                {recipes.map((recipe,i)=> (
-                      <div className="recipe" key={i}>
-                        <img src={recipe.picture} alt="" />
-                        <Recipe title={recipe.title} author={recipe.author} desc={recipe.desc}/>
+                {recipes.map((recipe)=> (
+                      <div key={recipe.recipeid} className="recipe">
+                        <RecipeCard title={recipe.title} 
+                          author={recipe.author} 
+                          desc={recipe.desc} 
+                          picture={recipe.picture}/>
                       </div>
                 ))}
             </div>
