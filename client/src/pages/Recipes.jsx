@@ -2,7 +2,6 @@ import React from "react"
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import RecipeCard from '../components/RecipeCard.jsx';
 import NavBar from "../components/NavBar.jsx";
 
@@ -31,10 +30,11 @@ const Recipes = () => {
             <div className="recipes">
                 {recipes.map((recipe)=> (
                       <div key={recipe.recipeid} className="recipe">
-                        <RecipeCard title={recipe.title} 
+                          <RecipeCard title={recipe.title} 
                           author={recipe.author} 
                           desc={recipe.desc} 
-                          picture={recipe.picture}/>
+                          picture={recipe.picture}
+                          recipeid={recipe.recipeid}/>
                       </div>
                 ))}
             </div>

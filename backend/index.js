@@ -1,8 +1,33 @@
 import express from 'express'
 import mysql from 'mysql'
 import cors from 'cors'
+import AWS from 'aws-sdk'
+import fs from 'fs'
 
 const app = express()
+
+AWS.config.update({
+  region: 'us-east-1',
+  accessKeyId: 'AKIAQ3EGWNE3KEIUS4ND',
+  secretAccessKey: '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'
+})
+
+const s3 = new AWS.S3()
+
+
+const params = {
+  Bucket: 'cookbookpicturebucket',
+  Key: 'myFile.txt',
+  Body: fs.createReadStream('./myFile.txt')
+}
+
+s3.upload(params, (err, data) => {
+  if (err) {
+    console.log('Error uploading file:', err)
+  } else {
+    console.log('File uploaded successfully. File location:', data.Location)
+  }
+})
 
 const db = mysql.createConnection({
   host: 'localhost',
@@ -21,6 +46,15 @@ app.get('/', (req, res) => {
 app.get('/recipes', (req, res) => {
   const q = 'SELECT * from recipes'
   db.query(q, (err, data) => {
+    if (err) return res.json(err)
+    return res.json(data)
+  })
+})
+
+app.get('/recipe/:recipeid', (req, res) => {
+  const recipeid = req.params.recipeid
+  const q = 'SELECT title, author, `desc`, picture FROM recipes WHERE recipeid = ?'
+  db.query(q, [recipeid], (err, data) => {
     if (err) return res.json(err)
     return res.json(data)
   })

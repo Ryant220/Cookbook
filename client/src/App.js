@@ -6,7 +6,7 @@ import {
 } from "react-router-dom"
 import Recipes from './pages/Recipes'
 import Add from './pages/Add'
-import Update from './pages/Update'
+import Recipe from './pages/Recipe'
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Recipes />} />
           <Route path="/add" element={<Add />} />
-          <Route path="/update/:id" element={<Update />} />
+          <Route path="/recipe/:id" element={<Recipe />} />
         </Routes>
       </BrowserRouter>
     </div>
