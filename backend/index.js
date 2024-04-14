@@ -8,12 +8,11 @@ const app = express()
 
 AWS.config.update({
   region: 'us-east-1',
-  accessKeyId: 'AKIAQ3EGWNE3KEIUS4ND',
-  secretAccessKey: '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'
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })
 
 const s3 = new AWS.S3()
-
 
 const params = {
   Bucket: 'cookbookpicturebucket',
